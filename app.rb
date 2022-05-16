@@ -4,22 +4,14 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'sqlite3'
 
-
-
-
 def init_db
 	@db = SQLite3::Database.new 'lepra.db'
 	@db.results_as_hash = true
 end
 
-
-
 before do
-init_db
+	init_db
 end
-
-
-
 
 configure do
 	init_db
@@ -41,8 +33,15 @@ end
 
 post '/new' do
 	content = params[:content]
+	if content.length <= 0
+		@error = "No post typed!"
+ 	return erb :new
+
+	end
  	erb content
 end
+
+
 
 get '/main' do
 	erb "Hello world"
