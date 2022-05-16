@@ -11,7 +11,10 @@ get '/new' do
 	erb :new
 end
 
-
+post '/new' do
+	content = params[:content]
+ 	erb content
+end
 
 get '/main' do
 	erb "Hello world"
