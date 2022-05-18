@@ -73,9 +73,14 @@ end
 #обработчик пост-запроса (браузер отправляет данные.а мы их принимаем)
 
 post '/details/:post_id' do
-	post_id = params[:post_id]
- content = params[:content]
- erb "Post #{post_id} comment: #{content}"
+post_id = params[:post_id]
+content = params[:content]
+
+ @db.execute 'insert into Comments (created_date, content, post_id) values (datetime(), ?, ?)', [content, post_id]
+
+
+redirect to('/details/' + post_id)
+
 
 end
 
