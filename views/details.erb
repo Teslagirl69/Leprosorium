@@ -4,12 +4,21 @@
    <%= @row['content'] %>
   <br />
   <br />
- Added at  <%= @row['created_date'] %>
+ Added at <%= @row['created_date'] %>
 </p>
   <br />
   <br />
-<h4> Comments </h4>
+<h4> Comments: </h4>
+  <br />
+<p>
+<% @comments.each do |comment| %>
+<br />
 
+ <%= comment['content'] %>
+    <small class="text-muted">Added at <%= comment['created_date'] %></small>
+</p>
+<hr />
+<%end%>
 
 <p>
 
