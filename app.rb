@@ -42,7 +42,7 @@ post '/new' do
  	return erb :new
 	end
 #сохранение данных в БД
-@db.execute 'insert into Posts (created_date, content) values (?, datetime())', [content]
+@db.execute 'insert into Posts (created_date, content) values (datetime(), ?)', [content]
 
 
 #перенаправление
@@ -62,6 +62,18 @@ get '/details/:post_id' do
 
 	erb :details
 end
+#обработчик пост-запроса (браузер отправляет данные.а мы их принимаем)
+
+post '/details/:post_id' do
+	post_id = params[:post_id]
+ content = params[:content]
+ erb "Post #{post_id} comment: #{content}"
+
+end
+
+
+
+
 
 
 get '/main' do
