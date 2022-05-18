@@ -50,6 +50,11 @@ redirect to '/'
  	erb content
 end
 
+get 'details/:post_id' do
+post_id = params[:post_id]
+erb "Displaying info with post and id #{post_id}"
+
+end
 
 
 get '/main' do
