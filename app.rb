@@ -18,7 +18,8 @@ configure do
 	@db.execute 'CREATE TABLE IF NOT EXISTS  "Posts" (
 	"id"	INTEGER PRIMARY KEY AUTOINCREMENT,
 	"created_date" DATE,
-	"content"	TEXT
+	"content"	TEXT,
+	"author_name" TEXT
 )'
 
 	@db.execute 'CREATE TABLE IF NOT EXISTS  "Comments" (
@@ -45,12 +46,13 @@ end
 
 post '/new' do
 	content = params[:content]
+	author_name = params[:author_name]
 	if content.length <= 0
 		@error = "No post typed!"
  	return erb :new
 	end
 #сохранение данных в БД
-@db.execute 'insert into Posts (created_date, content) values (datetime(), ?)', [content]
+@db.execute 'insert into Posts (created_date, content, author_name) values (datetime(), ?, ?)', [content, author_name]
 
 
 #перенаправление
